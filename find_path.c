@@ -17,18 +17,18 @@ char *find_path(char *input)
 
 	if (path)
 	{
-		pathcopy = strdup(path);
-		inlen = strlen(input);
+		pathcopy = str_dup(path);
+		inlen = str_len(input);
 
 		token = strtok(pathcopy, delim);
 		while (token != NULL)
 		{
-			toklen = strlen(token);
+			toklen = str_len(token);
 			filepath = malloc(inlen + toklen + 2);
-			strcpy(filepath, token);
-			strcat(filepath, "/");
-			strcat(filepath, input);
-	/*		strcat(filepath, "\0");*/
+			str_cpy(filepath, token);
+			str_cat(filepath, "/");
+			str_cat(filepath, input);
+	/*		str_cat(filepath, "\0");*/
 
 			if (stat(filepath, &buff) == 0)
 			{
@@ -48,4 +48,3 @@ char *find_path(char *input)
 	}
 	return (NULL);
 }
-

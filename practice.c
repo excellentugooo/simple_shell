@@ -20,15 +20,15 @@ int main(int ac, char *av[], char *env[])
         char *token = NULL;
         pid_t value;
 
-        putchar('$');
-        putchar(' ');
+        put_char('$');
+        put_char(' ');
 
         while(1)
         {
                 rvalue = getline(&input, &n, stdin);
                 if (rvalue == -1)
                         return (-1);
-                inputcopy = strdup(input);
+                inputcopy = str_dup(input);
 
                 token = strtok(input, delim);
                 ac = 0;
@@ -50,22 +50,22 @@ int main(int ac, char *av[], char *env[])
 		path = find_path(input);
 		if (path == NULL)
 		{
-			if (strcmp(av[0], "exit") == 0)
+			if (str_cmp(av[0], "exit") == 0)
 			{
                 	free(input);
                 	free(inputcopy);
                 	free(av);
                 	exit(0);
             		}
-			else if (strcmp(av[0], "env") == 0)
+			else if (str_cmp(av[0], "env") == 0)
 			{
 				i = 0;
 				while (enp[i] != NULL)
 				{
 					printf("%s\n", enp[i]);
 					i++;
-					putchar('$');
-                        		putchar(' ');
+					put_char('$');
+                        		put_char(' ');
 
 				}
 
@@ -73,8 +73,8 @@ int main(int ac, char *av[], char *env[])
             		else
 			{
 			printf("%s: command not found\n", av[0]);
-			putchar('$');
-        		putchar(' ');
+			put_char('$');
+        		put_char(' ');
 			}
 		}
 		else
@@ -93,8 +93,8 @@ int main(int ac, char *av[], char *env[])
         	        else
 	                {
                         	wait(NULL);
-                	        putchar('$');
-				putchar(' ');
+                	        put_char('$');
+				put_char(' ');
 	                }
 		}
         }
