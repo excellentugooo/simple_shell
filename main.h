@@ -9,4 +9,6 @@
 #include <sys/stat.h>
 #include <string.h>
 
+char *find_path(char *input);
+
 #endif
