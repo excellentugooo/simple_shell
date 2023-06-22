@@ -25,6 +25,7 @@ int main(int ac, char *av[], char *env[])
 
         while(1)
         {
+
                 rvalue = getline(&input, &n, stdin);
                 if (rvalue == -1)
                         return (-1);
@@ -39,9 +40,9 @@ int main(int ac, char *av[], char *env[])
                 }
                 ac++;
                 av = malloc(sizeof(char *) * ac);
-		if (av == NULL)
-			return(NULL);
-		token = NULL;
+				if (av == NULL)
+					return(0);
+				token = NULL;
                 token = strtok(inputcopy, delim);
                 for (i = 0; i < ac; i++)
                 {
@@ -50,9 +51,9 @@ int main(int ac, char *av[], char *env[])
                 }
                 av[i] = NULL;
 
-		path = find_path(input);
-		if (path == NULL)
-		{
+				path = find_path(input);
+				if (path == NULL)
+			{
 			if (str_cmp(av[0], "exit") == 0)
 			{
                 	free(input);

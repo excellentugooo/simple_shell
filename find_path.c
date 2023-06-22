@@ -7,8 +7,8 @@
 
 char *find_path(char *input)
 {
-	char *path, *pathcopy;
-	char *token, *filepath;
+	char *path = NULL, *pathcopy = NULL;
+	char *token = NULL, *filepath = NULL;
 	int inlen, toklen;
 	struct stat buff;
 	char *delim = ":";
@@ -24,11 +24,13 @@ char *find_path(char *input)
 		while (token != NULL)
 		{
 			toklen = str_len(token);
-			filepath = malloc(inlen + toklen + 2);
+			filepath = malloc(inlen + toklen + 2 + 1);
+			if (filepath == NULL)
+				return(-1);
 			str_cpy(filepath, token);
 			str_cat(filepath, "/");
 			str_cat(filepath, input);
-	/*		str_cat(filepath, "\0");*/
+			filepath[inlen + toklen + 2] = '\0';
 
 			if (stat(filepath, &buff) == 0)
 			{
@@ -42,6 +44,8 @@ char *find_path(char *input)
 			}
 		}
 		free(pathcopy);
+		free(path);
+		free(filepath);
 		if (stat(input, &buff) == 0)
 			return (input);
 		return(NULL);
