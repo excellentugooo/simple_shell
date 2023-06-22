@@ -39,6 +39,9 @@ int main(int ac, char *av[], char *env[])
                 }
                 ac++;
                 av = malloc(sizeof(char *) * ac);
+		if (av == NULL)
+			return(NULL);
+		token = NULL;
                 token = strtok(inputcopy, delim);
                 for (i = 0; i < ac; i++)
                 {
