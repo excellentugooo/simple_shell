@@ -26,7 +26,10 @@ char *find_path(char *input)
 			toklen = str_len(token);
 			filepath = malloc(inlen + toklen + 2 + 1);
 			if (filepath == NULL)
-				return(-1);
+			{
+				free(pathcopy);
+				return(NULL);
+			}
 			str_cpy(filepath, token);
 			str_cat(filepath, "/");
 			str_cat(filepath, input);
@@ -44,8 +47,6 @@ char *find_path(char *input)
 			}
 		}
 		free(pathcopy);
-		free(path);
-		free(filepath);
 		if (stat(input, &buff) == 0)
 			return (input);
 		return(NULL);

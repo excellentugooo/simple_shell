@@ -10,6 +10,7 @@
 #include <string.h>
 
 int put_char(char c);
+char **tokenize(char *input, char *delim);
 char *find_path(char *input);
 char *str_cpy(char *dest, char *src);
 int str_len(char *s);

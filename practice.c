@@ -8,56 +8,48 @@
 #include <stdlib.h>
 
 
-int main(int ac, char *av[], char *env[])
+int main(__attribute__((unused)) int ac, char *av[], char *env[])
 {
-        char *input = NULL, *inputcopy = NULL;
-        int i;
+	char *input = NULL, *inputcpy= NULL;
+	int i;
 	char *path = NULL;
         ssize_t rvalue = 0;
-        size_t n;
+        size_t n = 0;
 	char **enp = env;
-        const char *delim = " \n";
-        char *token = NULL;
         pid_t value;
 
         put_char('$');
         put_char(' ');
-
+	
         while(1)
         {
 
-                rvalue = getline(&input, &n, stdin);
+        	rvalue = getline(&input, &n, stdin);
                 if (rvalue == -1)
-                        return (-1);
-                inputcopy = str_dup(input);
-
-                token = strtok(input, delim);
-                ac = 0;
-                while (token != NULL)
-		                {
-                        ac++;
-                        token = strtok(NULL, delim);
-                }
-                ac++;
-                av = malloc(sizeof(char *) * ac);
-				if (av == NULL)
-					return(0);
-				token = NULL;
-                token = strtok(inputcopy, delim);
-                for (i = 0; i < ac; i++)
-                {
-                        av[i] = token;
-                        token = strtok(NULL, delim);
-                }
-                av[i] = NULL;
-
-				path = find_path(input);
-				if (path == NULL)
-			{
+                        return(-1);
+		inputcpy = strdup(input);
+/*		path = find_path(input);*/
+		i = 0;
+		while (inputcpy[i] != '\0')
+		{
+			if (inputcpy[i] == '\n')
+				inputcpy[i] = '\0';
+			i++;
+		}
+		av = tokenize(inputcpy, " \n");
+		path = find_path(input);
+		if (path == NULL)
+		{
+			if (av == NULL || av[0] == NULL)
+    			{
+        			free(input);
+				free(inputcpy);
+        			exit(0);
+    			}
 			if (str_cmp(av[0], "exit") == 0)
 			{
                 	free(input);
-                	free(inputcopy);
+			free(inputcpy);
                 	free(av);
                 	exit(0);
             		}
@@ -91,7 +83,8 @@ int main(int ac, char *av[], char *env[])
         	        {
 	                        execve(path, av, env);
 
-                        perror("Error");
+                         	perror("Error");
+			 	free(av);
                         	exit(EXIT_FAILURE);
                 	}
         	        else
@@ -101,9 +94,8 @@ int main(int ac, char *av[], char *env[])
 				put_char(' ');
 	                }
 		}
+		free(input);
+		free(inputcpy);
         }
-        free(input);
-	free (inputcopy);
-	free (av);
         return (0);
 }
