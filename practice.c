@@ -11,27 +11,18 @@
 int main(__attribute__((unused)) int ac, char *av[], char *env[])
 {
 	char *input = NULL;
-	int i;
 	char *path = NULL;
         ssize_t rvalue = 0;
         size_t n = 0;
-	char **enp = env;
-        pid_t value;
 
         while(1)
         {
 		writes("simpleshell$ ", 1);
 
-        	rvalue = getline(&input, &n, stdin);
+        	rvalue = get_line(&input, &n, stdin);
                 if (rvalue == -1)
                         return(-1);
-		i = 0;
-		while (input[i] != '\0')
-		{
-			if (input[i] == '\n')
-				input[i] = '\0';
-			i++;
-		}
+		rmline(input);
 		av = tokenize(input, " \n");
 		path = find_path(input);
 		if (path == NULL)
@@ -43,16 +34,11 @@ int main(__attribute__((unused)) int ac, char *av[], char *env[])
     			}
 			else if (str_cmp(av[0], "exit") == 0)
 			{
-                		exit(0);
-            		}
+				ex_it(av);
+			}
 			else if (str_cmp(av[0], "env") == 0)
 			{
-				i = 0;
-				while (enp[i] != NULL)
-				{
-					writes("env[i]", 1);
-					i++;
-				}
+				envip(env);
 
 			}
             		else
@@ -62,22 +48,7 @@ int main(__attribute__((unused)) int ac, char *av[], char *env[])
 		}
 		else
 		{
-			value = fork();
-
-	                if (value == -1)
-                        	exit(EXIT_FAILURE);
-                	else if (value == 0)
-        	        {
-	                        execve(path, av, env);
-
-                         	perror("Error");
-			 	free(av);
-                        	exit(EXIT_FAILURE);
-                	}
-        	        else
-	                {
-                        	wait(NULL);
-	                }
+			exec_ve(path, av, env);
 		}
         }
 	free(input);

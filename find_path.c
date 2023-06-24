@@ -13,7 +13,7 @@ char *find_path(char *input)
 	struct stat buff;
 	char *delim = ":";
 
-	path = getenv("PATH");
+	path = get_env("PATH");
 
 	if (path)
 	{

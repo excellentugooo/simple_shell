@@ -12,6 +12,13 @@
 int put_char(char c);
 char **tokenize(char *input, char *delim);
 void writes(char *s, int stream);
+void exec_ve(char *path, char *av[], char *env[]);
+int _atoi(char *s);
+char *get_env(char *name);
+char *str_str(char *haystack, char *needle);
+void rmline(char *input);
+void envip(char *env[]);
+void ex_it(char *av[]);
 char *find_path(char *input);
 char *str_cpy(char *dest, char *src);
 int str_len(char *s);

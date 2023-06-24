@@ -26,6 +26,12 @@
 
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 {
+    size_t pos = 0;
+    int eof_reached = 0;
+    char c;
+    char *temp;
+    ssize_t bytes_read;
+
     if (*lineptr == NULL && *n == 0)
     {
         *n = 1; /* Initialize the line length to 0*/
@@ -36,13 +42,10 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
         }
     }
 
-    size_t pos = 0;
-    int eof_reached = 0;
-    char c;
 
     while (!eof_reached)
     {
-        ssize_t bytes_read = read(fileno(stream), &c, 1);
+        bytes_read = read(fileno(stream), &c, 1);
         if (bytes_read <= 0)
         {
             break; /* End the loop if read encounters an error or EOF*/
@@ -51,7 +54,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
         if (pos >= (*n -1))
         {
             *n *= 2; /* Double the allocated memory size*/
-            char *temp = realloc(*lineptr, sizeof(char) * (*n + 1));
+            temp = realloc(*lineptr, sizeof(char) * (*n + 1));
             if (temp == NULL)
             {
                 return -1; /* Memory reallocation failed*/
@@ -72,7 +75,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
         return -1; /* No characters read (EOF reached or error occurred)*/
     }
 
-    (*lineptr)[pos] = '\0'; // Add null terminator*/
+    (*lineptr)[pos] = '\0'; /* Add null terminator*/
 
     return pos; /* Return the number of characters read (excluding null terminator)*/
 }
