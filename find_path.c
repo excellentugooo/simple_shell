@@ -19,7 +19,6 @@ char *find_path(char *input)
 	{
 		pathcopy = str_dup(path);
 		inlen = str_len(input);
-
 		token = strtok(pathcopy, delim);
 		while (token != NULL)
 		{
@@ -49,7 +48,6 @@ char *find_path(char *input)
 		free(pathcopy);
 		if (stat(input, &buff) == 0)
 			return (input);
-		return(NULL);
 	}
 	return (NULL);
 }

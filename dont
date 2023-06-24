@@ -1,0 +1,9 @@
+int devNull = open("/dev/null", O_WRONLY);
+        if (devNull != -1)
+        {
+            dup2(devNull, STDERR_FILENO);
+            close(devNull);
+        }
+
+
+this is to remove error when you press enter

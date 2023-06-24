@@ -11,6 +11,7 @@
 
 int put_char(char c);
 char **tokenize(char *input, char *delim);
+void writes(char *s, int stream);
 char *find_path(char *input);
 char *str_cpy(char *dest, char *src);
 int str_len(char *s);
