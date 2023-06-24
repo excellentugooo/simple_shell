@@ -8,11 +8,11 @@ int devNull = open("/dev/null", O_WRONLY);
 
 this is to remove error when you press enter
 
-else if (strcmp(av[0], "setenv") == 0)
+	else if (strcmp(av[0], "setenv") == 0)
             {
                 if (av[1] == NULL || av[2] == NULL)
                 {
-                    writes("setenv: Invalid arguments\n", 2);
+                    writes("setenv: Invalid arguments\n", 1);
                 }
                 else
                 {
@@ -23,17 +23,17 @@ else if (strcmp(av[0], "setenv") == 0)
                 }
             }
 
-else if (strcmp(av[0], "unsetenv") == 0)
+	else if (strcmp(av[0], "unsetenv") == 0)
             {
                 if (av[1] == NULL)
                 {
-                    writes("unsetenv: Invalid argument\n", 2);
+                    writes("unsetenv: Invalid argument\n", 1);
                 }
                 else
                 {
                     if (unsetenv(av[1]) != 0)
                     {
-                        writes("unsetenv: Failed to unset environment variable\n", 2);
+                        writes("unsetenv: Failed to unset environment variable\n", 1);
                     }
                 }
             }
@@ -105,4 +105,64 @@ void execute_command(char *command, char *env[])
 another thing i can try and do is tokenize then i store it in a while loop too
 
 
+void executeCommand(char *command, char *env[]) {
+    char *input = NULL;
+    char *path = NULL;
+    ssize_t rvalue = 0;
+    size_t n = 0;
+
+    rvalue = get_line(&input, &n, command);
+    if (rvalue == -1)
+        return;
+    rmline(input);
+    av = tokenize(input, " \n");
+    path = find_path(input);
+    if (path == NULL) {
+        if (av == NULL || av[0] == NULL) {
+            free(input);
+            exit(0);
+        }
+        else if (str_cmp(av[0], "exit") == 0) {
+            ex_it(av);
+        }
+        else if (str_cmp(av[0], "env") == 0) {
+            envip(env);
+        }
+        else {
+            writes(":command not found\n", 1);
+        }
+    }
+    else {
+        exec_ve(path, av, env);
+    }
+    free(input);
+}
+
+int main(__attribute__((unused)) int ac, char *av[], char *env[]) {
+    char *input = NULL;
+    ssize_t rvalue = 0;
+    size_t n = 0;
+
+    while (1) {
+        writes("simpleshell$ ", 1);
+
+        rvalue = get_line(&input, &n, stdin);
+        if (rvalue == -1)
+            return (-1);
+
+        // Tokenize input by ;
+        char *token;
+        char *command = strtok(input, ";");
+        while (command != NULL) {
+            // Execute individual command
+            executeCommand(command, env);
+
+            // Move to the next command
+            command = strtok(NULL, ";");
+        }
+
+        free(input);
+    }
+    return (0);
+}
 

@@ -33,18 +33,17 @@ int main(__attribute__((unused)) int ac, char *av[], char *env[])
         			exit(0);
     			}
 			else if (str_cmp(av[0], "exit") == 0)
-			{
 				ex_it(av);
-			}
 			else if (str_cmp(av[0], "env") == 0)
-			{
 				envip(env);
-
-			}
+			else if (str_cmp(av[0], "setenv") == 0)
+				set_env(av);
+			else if (strcmp(av[0], "unsetenv") == 0)
+				unset_env(av);
+			else if (strcmp(av[0], "cd") == 0)
+				cd(av);
             		else
-			{
 				writes(":command not found\n", 1);
-			}
 		}
 		else
 		{
