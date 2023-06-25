@@ -17,4 +17,3 @@ void writes(char *s, int stream)
 		write(stream, &s[i], 1);
 	}
 }
-

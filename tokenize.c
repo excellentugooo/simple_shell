@@ -10,15 +10,15 @@ char **tokenize(char *input, char *delim)
 	inputcopy = str_dup(input);
 	if (inputcopy == NULL)
 		return (NULL);
-        token = strtok(input, delim);
+        token = str_tok(input, delim);
         numtok = 0;
         while (token != NULL)
         {
         	numtok++;
-                token = strtok(NULL, delim);
+                token = str_tok(NULL, delim);
         }
 
-        buff = malloc(sizeof(char *) * numtok + 1);
+        buff = malloc(sizeof(char *) * (numtok + 1));
         if (buff == NULL)
 	{
 		free(inputcopy);
@@ -26,11 +26,11 @@ char **tokenize(char *input, char *delim)
 	}
 
         token = NULL;
-        token = strtok(inputcopy, delim);
+        token = str_tok(inputcopy, delim);
         for (i = 0; i < numtok; i++)
         {
 		buff[i] = str_dup(token);
-                token = strtok(NULL, delim);
+                token = str_tok(NULL, delim);
         }
 	buff[i] = NULL;
 
