@@ -37,7 +37,7 @@ char *find_path(char *input)
 			if (stat(filepath, &buff) == 0)
 			{
 				free(pathcopy);
-				return (filepath);
+			return (filepath);
 			}
 			else
 			{

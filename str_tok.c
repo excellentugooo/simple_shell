@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * str_tok - function that cut a string into tokens depending of the delimit
- * @s: string to cut in parts
- * @d: delzlimiters
- * Return: first partition
+ * str_tok - tokenizer.
+ * @s: string
+ * @d: delimiter
+ * Return: tokenizied string
  */
 char *str_tok(char *s, char *d)
 {
