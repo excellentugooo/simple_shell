@@ -1,27 +1,5 @@
 #include "main.h"
-/**
- * _sch - search if a char is inside a string
- * @s: string to review
- * @c: char to find
- * Return: 1 if success 0 if not
- */
-int _sch(char *s, char c)
-{
-	int cont = 0;
 
-	while (s[cont] != '\0')
-	{
-		if (s[cont] == c)
-		{
-			break;
-		}
-		cont++;
-	}
-	if (s[cont] == c)
-		return (1);
-	else
-		return (0);
-}
 /**
  * str_tok - function that cut a string into tokens depending of the delimit
  * @s: string to cut in parts
@@ -30,31 +8,31 @@ int _sch(char *s, char c)
  */
 char *str_tok(char *s, char *d)
 {
-	static char *ultimo;
+	static char *token;
 	int i = 0, j = 0;
 
 	if (!s)
-		s = ultimo;
+		s = token;
 	while (s[i] != '\0')
 	{
-		if (_sch(d, s[i]) == 0 && s[i + 1] == '\0')
+		if (srchdelim(d, s[i]) == 0 && s[i + 1] == '\0')
 		{
-			ultimo = s + i + 1;
-			*ultimo = '\0';
+			token = s + i + 1;
+			*token = '\0';
 			s = s + j;
 			return (s);
 		}
-		else if (_sch(d, s[i]) == 0 && _sch(d, s[i + 1]) == 0)
+		else if (srchdelim(d, s[i]) == 0 && srchdelim(d, s[i + 1]) == 0)
 			i++;
-		else if (_sch(d, s[i]) == 0 && _sch(d, s[i + 1]) == 1)
+		else if (srchdelim(d, s[i]) == 0 && srchdelim(d, s[i + 1]) == 1)
 		{
-			ultimo = s + i + 1;
-			*ultimo = '\0';
-			ultimo++;
+			token = s + i + 1;
+			*token = '\0';
+			token++;
 			s = s + j;
 			return (s);
 		}
-		else if (_sch(d, s[i]) == 1)
+		else if (srchdelim(d, s[i]) == 1)
 		{
 			j++;
 			i++;
