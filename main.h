@@ -29,6 +29,7 @@ char *str_cat(char *dest, char *src);
 char *str_dup(char *str);
 int str_cmp(char *s1, char *s2);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
+int _sch(char *s, char c);
 char *str_tok(char *s, char *d);
 
 #endif

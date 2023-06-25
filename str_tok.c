@@ -1,11 +1,31 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#include "main.h"
 /**
- * _strtoky - function that cuts a string into tokens depending on the delimiters
- * @s: string to cut into parts
- * @d: delimiters
+ * _sch - search if a char is inside a string
+ * @s: string to review
+ * @c: char to find
+ * Return: 1 if success 0 if not
+ */
+int _sch(char *s, char c)
+{
+	int cont = 0;
+
+	while (s[cont] != '\0')
+	{
+		if (s[cont] == c)
+		{
+			break;
+		}
+		cont++;
+	}
+	if (s[cont] == c)
+		return (1);
+	else
+		return (0);
+}
+/**
+ * str_tok - function that cut a string into tokens depending of the delimit
+ * @s: string to cut in parts
+ * @d: delzlimiters
  * Return: first partition
  */
 char *str_tok(char *s, char *d)
@@ -17,50 +37,28 @@ char *str_tok(char *s, char *d)
 		s = ultimo;
 	while (s[i] != '\0')
 	{
-		int cont = 0;
-		while (d[cont] != '\0')
-		{
-			if (s[i] == d[cont])
-				break;
-			cont++;
-		}
-
-		if (d[cont] == '\0' && s[i + 1] == '\0')
+		if (_sch(d, s[i]) == 0 && s[i + 1] == '\0')
 		{
 			ultimo = s + i + 1;
-			s[i + 1] = '\0';
+			*ultimo = '\0';
 			s = s + j;
 			return (s);
 		}
-		else if (d[cont] == '\0' && d[i + 1] == '\0')
+		else if (_sch(d, s[i]) == 0 && _sch(d, s[i + 1]) == 0)
 			i++;
-		else if (d[cont] == '\0' && d[i + 1] != '\0')
+		else if (_sch(d, s[i]) == 0 && _sch(d, s[i + 1]) == 1)
 		{
 			ultimo = s + i + 1;
-			s[i + 1] = '\0';
+			*ultimo = '\0';
 			ultimo++;
 			s = s + j;
 			return (s);
 		}
-		else if (d[cont] != '\0')
+		else if (_sch(d, s[i]) == 1)
+		{
+			j++;
 			i++;
-		j++;
+		}
 	}
 	return (NULL);
 }
-
-/*int main(void)
-{
-	char input[] = "Hello, world! This is a sample string.";
-	char delimiters[] = " ,.!";  // Delimiters: space, comma, period, exclamation mark
-
-	char *token = _strtoky(input, delimiters);
-	while (token != NULL)
-	{
-		printf("%s\n", token);
-		token = _strtoky(NULL, delimiters);
-	}
-
-	return 0;
-}
-*/
