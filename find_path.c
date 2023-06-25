@@ -13,8 +13,8 @@ char *find_path(char *input)
 	struct stat buff;
 	char *delim = ":";
 
+/*	rmspace(input);*/
 	path = get_env("PATH");
-
 	if (path)
 	{
 		pathcopy = str_dup(path);
@@ -37,7 +37,7 @@ char *find_path(char *input)
 			if (stat(filepath, &buff) == 0)
 			{
 				free(pathcopy);
-			return (filepath);
+				return (filepath);
 			}
 			else
 			{
