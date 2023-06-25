@@ -1,5 +1,8 @@
 #include "main.h"
 
+void* re_alloc(void* ptr, size_t size);
+
+
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 {
 	size_t position = 0;
@@ -26,7 +29,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
         if (position >= (*n -1))
         {
             *n *= 2;
-            tmp = realloc(*lineptr, sizeof(char) * (*n + 1));
+            tmp = re_alloc(*lineptr, sizeof(char) * (*n + 1));
             if (tmp == NULL)
             {
                 return (-1);
