@@ -1,38 +1,39 @@
 #include "main.h"
 
-int main(__attribute__((unused)) int ac, char **av)
+void int_shell(void)
 {
 	char *input = NULL;
-	/*char **av;*/
+	char **av;
 	int stat = -1;
 
 	do{
 		prompt();
 		input = getint();
-		stat = exec_vp(av);
+		av = split_line(input);
+		stat = execute_args(av);
 		free(input);
 		free(av);
 
 		if (stat >= 0)
 			exit(stat);
 	}while (stat == -1);
-	return (0);
 
 }	
 
-/*void non_intshell(void)
+void non_intshell(void)
 {
         char *input = NULL;
-        char *av[] = NULL;
+        char **av;
         int stat = -1;
 
         do{
-                input = getint();
-                stat = execvp(av);
+                input = read_stream();
+				av = split_line(input);
+                stat = execute_args(av);
                 free(input);
                 free(av);
 
                 if (stat >= 0)
                         exit(stat);
         }while (stat == -1);
-}*/
+}

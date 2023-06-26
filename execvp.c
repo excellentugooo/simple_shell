@@ -8,7 +8,7 @@ int exec_vp(char *av[])
 	value = fork();
 	if (value ==  0)
 	{
-		if (execve(av[0], av, NULL) == -1)
+		if (execvp(av[0], av) == -1)
 
 		perror("no child process");
 		exit(EXIT_FAILURE);
