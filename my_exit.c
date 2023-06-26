@@ -9,7 +9,9 @@
 int my_exit(char **av)
 {
 	if (av[1])
+	{
 		return (atoi(av[1]));
+	}
 	else
 		return (0);
 }
