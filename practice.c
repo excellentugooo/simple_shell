@@ -41,7 +41,9 @@ int main(__attribute__((unused)) int ac, char *av[], char *env[])
 			execute_cmd(av, env, cmd);
 			cmd = strtok(NULL, ";");
 		}
+		free(input);
+		free_double_ptr(av);
         }
-	free(input);
+/*	free_double_ptr(av);*/
         return (0);
 }

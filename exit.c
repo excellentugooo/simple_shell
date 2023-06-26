@@ -11,11 +11,13 @@ void ex_it(char *av[])
 
 	if (av[1] != NULL)
 	{
+		free(av);
 		status = _atoi(av[1]);
 		exit(status);
 	}
 	else
 	{
+		free(av);
 		exit(0);
 	}
 }
