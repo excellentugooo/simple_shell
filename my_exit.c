@@ -1,21 +1,15 @@
 #include "main.h"
 
 /**
- * own_exit - couses normal process termination
- * @args: empty args
+* my_exit - terminates a process
+ * @av: argument.
  *
- * Return: 0 to terminate the process
+ * Return: 0 on success
  */
-int own_exit(char **args)
+int my_exit(char **av)
 {
-	/* exit with status */
-	if (args[1])
-	{
-		return (atoi(args[1]));
-	}
-	/* exit success */
+	if (av[1])
+		return (atoi(av[1]));
 	else
-	{
 		return (0);
-	}
 }

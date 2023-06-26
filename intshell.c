@@ -1,39 +1,46 @@
 #include "main.h"
 
+/**
+* int_shell - shell for interctive mode.
+*/
+
 void int_shell(void)
 {
 	char *input = NULL;
 	char **av;
 	int stat = -1;
 
-	do{
+	do {
 		prompt();
 		input = getint();
-		av = split_line(input);
-		stat = execute_args(av);
+		av = parse(input);
+		stat = excute_built(av);
 		free(input);
 		free(av);
 
 		if (stat >= 0)
 			exit(stat);
-	}while (stat == -1);
+	} while (stat == -1);
 
-}	
+}
 
+/**
+* non_intshell - shell for non interactive mode.
+*/
 void non_intshell(void)
 {
-        char *input = NULL;
-        char **av;
-        int stat = -1;
+	char *input = NULL;
+	char **av;
+	int stat = -1;
 
-        do{
-                input = read_stream();
-				av = split_line(input);
-                stat = execute_args(av);
-                free(input);
-                free(av);
+	do {
+		input = get_strem();
+		av = parse(input);
+		stat = excute_built(av);
+		free(input);
+		free(av);
 
-                if (stat >= 0)
-                        exit(stat);
-        }while (stat == -1);
+		if (stat >= 0)
+			exit(stat);
+	} while (stat == -1);
 }

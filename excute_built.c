@@ -1,41 +1,38 @@
 #include "main.h"
 
 /**
- * execute_args - map if command is a builtin or a process
- * @args: command and its flags
+ * excute_built -  execute command
+ * @av: command
  *
- * Return: 1 on sucess, 0 otherwise
+ * Return: 1 on sucess, 0 on failure
  */
-int execute_args(char **args)
+int excute_built(char **av)
 {
-	char *builtin_func_list[] = {
+	char *built_list[] = {
 		"cd",
 		"env",
 		"help",
 		"exit"
 	};
-	int (*builtin_func[])(char **) = {
-		&cd,
-		&env,
-		&assist,
-		&own_exit
+	int (*built_function[])(char **) = {
+		&cdir,
+		&set_env,
+		&he_lp,
+		&my_exit
 	};
-	unsigned long int i = 0;
+	unsigned long int j;
 
-	if (args[0] == NULL)
-	{
-		/* empty command was entered */
+	if (av[0] == NULL)
 		return (-1);
-	}
-	/* find if the command is a builtin */
-	for (; i < sizeof(builtin_func_list) / sizeof(char *); i++)
+
+	j = 0;
+	while (j < sizeof(built_list) / sizeof(char *))
 	{
-		/* if there is a match execute the builtin command */
-		if (strcmp(args[0], builtin_func_list[i]) == 0)
+		if (strcmp(av[0], built_list[j]) == 0)
 		{
-			return ((*builtin_func[i])(args));
+			return ((*built_function[j])(av));
 		}
+		j++;
 	}
-	/* create a new process */
-	return (exec_vp(args));
+	return (exec_vp(av));
 }

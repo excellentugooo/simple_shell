@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+* getint - gets input from stdin
+* Return: input
+*/
+
 char *getint(void)
 {
 	char *input = NULL;

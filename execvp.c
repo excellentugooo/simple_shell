@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+* exec_vp - executes and creates new child process.
+* @av: takes command
+* Return: -1
+*/
+
 int exec_vp(char *av[])
 {
 	pid_t value;

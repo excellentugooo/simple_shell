@@ -1,21 +1,21 @@
 #include "main.h"
 
 /**
- * env - function that prints enviroment variables
- * @args: arguments
+ * set_env - prints enviroment variable
+ * @av: argument
  *
- * Return: 1 on success, 0 otherwise
+ * Return: 1 on success, 0n on failure
  */
-int env(char **args)
+int set_env(char **av)
 {
-	int i = 0;
-	(void)(**args);
+	int y = 0;
+	(void)(**av);
 
-	while (environ[i])
+	while (environ[y])
 	{
-		write(STDOUT_FILENO, environ[i], strlen(environ[i]));
+		write(STDOUT_FILENO, environ[y], strlen(environ[y]));
 		write(STDOUT_FILENO, "\n", 1);
-		i++;
+		y++;
 	}
 	return (-1);
 }

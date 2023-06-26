@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#define TOK_DELIM " \t\r\n\a\""
+/*#define DELIM " \n\a\t\r""*/
 extern char **environ;
 
 
@@ -18,25 +18,25 @@ int put_char(char c);
 void free_double_ptr(char **ptr);
 char **tokenize(char *input, char *delim);
 void writes(char *s, int stream);
-void prompt();
+void prompt(void);
 char *getint(void);
 int exec_vp(char *av[]);
-char *read_stream(void);
-int own_exit(char **args);
-int env(char **args);
-int cd(char **args);
-int assist(char **args);
-int execute_args(char **args);
-char **split_line(char *line);
+char *get_strem(void);
+int my_exit(char **av);
+int set_env(char **av);
+int cdir(char **av);
+int he_lp(char **av);
+int excute_built(char **av);
+char **parse(char *input);
 void non_intshell(void);
 void int_shell(void);
 
 void exec_ve(char *path, char *av[], char *env[]);
 int _atoi(char *s);
 char *get_env(char *enviv);
-void set_env(char *av[]);
+/*void set_env(char *av[]);
 void unset_env(char *av[]);
-/*void cd(char *av[]);*/
+void cd(char *av[]);*/
 void rmspace(char *input);
 void *re_alloc(void *ptr, size_t size);
 void rmit(char *input);

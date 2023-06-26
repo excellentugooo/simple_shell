@@ -1,12 +1,10 @@
 #include "main.h"
 
 /**
- * writes: prints to either in out or err
+ * writes - prints string
  *
- * @str: the string to be printed
- * @stm: where to print to (in out or err)
- *
- * Return: nothing
+ * @s: the string to be printed
+ * @stream: where to print
  */
 void writes(char *s, int stream)
 {
