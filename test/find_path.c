@@ -20,7 +20,7 @@ char *find_path(char *input)
 	{
 		pathcopy = str_dup(path);
 		inlen = str_len(input);
-		token = str_tok(pathcopy, delim);
+		token = strtok(pathcopy, delim);
 		while (token != NULL)
 		{
 			toklen = str_len(token);
@@ -43,7 +43,7 @@ char *find_path(char *input)
 			else
 			{
 				free(filepath);
-				token = str_tok(NULL, delim);
+				token = strtok(NULL, delim);
 			}
 		}
 		free(pathcopy);

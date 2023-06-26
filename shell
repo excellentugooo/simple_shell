@@ -7,8 +7,3 @@
 
 int main(void)
 {
-	char *prompt = "#alxshell$ ";
-
-	printf("%s\n", prompt);
-
-

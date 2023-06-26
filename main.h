@@ -14,6 +14,10 @@ int put_char(char c);
 void free_double_ptr(char **ptr);
 char **tokenize(char *input, char *delim);
 void writes(char *s, int stream);
+void prompt();
+char *getint(void);
+int exec_vp(char *av[]);
+
 void exec_ve(char *path, char *av[], char *env[]);
 int _atoi(char *s);
 char *get_env(char *enviv);
