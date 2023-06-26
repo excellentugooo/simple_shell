@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * execute_cmd - it executes the commands received
+ * @av: argument vector
+ * @env: enviroment variable
+ * @cmd: command
+ */
+
 void execute_cmd(char *av[], char *env[], char *cmd)
 {
 	char *path = NULL;

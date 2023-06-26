@@ -6,20 +6,29 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <stdlib.h>
+#include <malloc.h>
 
+/**
+ * main - a simple shell
+ * @ac: argument count
+ * @av: argument vector
+ * @env: environment variable
+ *
+ * Return: 0 on success, -1 on failure
+ */
 
 int main(__attribute__((unused)) int ac, char *av[], char *env[])
 {
 	char *input = NULL;
 	char *cmd = NULL;
-        ssize_t rvalue = 0;
-        size_t n = 0;
+	ssize_t rvalue = 0;
+	size_t n = 0;
 
-        while(1)
-        {
+	while(1)
+	{
 		writes("simpleshell$ ", 1);
 
-        	rvalue = get_line(&input, &n, stdin);
+        	rvalue = getline(&input, &n, stdin);
                 if (rvalue == -1)
                         return(-1);
 		rmline(input);

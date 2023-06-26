@@ -1,0 +1,48 @@
+.\" Man page for simple shell.
+.\" Contact ugooo.okonkwo@gmail.com to correct errors or typos.
+.TH man 8 "27/06/2023" "Manual page for simple sell"
+
+.SH NAME
+.B simple_shell
+- Man For a command language interpreter (Simple Shell) Project for ALX SE School.
+
+.SH SYNOPSIS
+.B ./hsh\fR
+
+.SH DESCRIPTION
+ command language interpreter. It allows users to interact with the operating system by accepting commands and executing them. The shell acts as a command-line interpreter, interpreting the commands entered by the user and translating them into instructions that the operating system can understand.
+
+.SH OPTIONS
+Options are specific to and interpreted by the program that the command calls. By convention, options are separate arguments or flags  that follow the name of the command.
+
+.SH COMMAND
+pwd: Shows the path of the folder where you're currently at.
+ls: Shows or list the contents of a folder.
+cp: copy a file to another folder or directory.
+rm: Delete files.
+sh, bash: Interpreters of commands.
+mkdir: Create a folder.
+rmdir: Delete a folder
+sleep: "Sleep" system/machine during the seconds you indicate.
+touch: create a file.
+cat: Shows/list the contents of a file.
+echo: shows the content of what you indicate.
+kernelversion: shows the kernel version
+chgrp: Change a file group.
+kill: "Kill" a process.
+chmod: Change the permissions of a file.
+ln: Create a link between files or folders.
+mv: Move a file to another folder or directory.
+chown: Change the user of a file.
+
+.SH SEE ALSO
+chdir (2), close (2), execve (2), exit (3), fflush (3), fork (2), free (3), getcwd (3), getline (3), malloc (3), open (2), read (2), stat (2), signal (2), strtok (3), wait (2), waitpid (2), write (2).
+
+
+.SH BUGS
+No known bugs.
+
+.SH AUTHORS
+okonkwo ugochinyere <ugooo.okonkwo@gmail.com>
+chukwu miracle <mimigolld@gmail.com>
+

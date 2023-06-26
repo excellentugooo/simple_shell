@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * cd - changes the directory
+ * @av: target directory
+ */
+
 void cd(char *av[])
 {
 	char *directory = av[1];
@@ -14,7 +19,7 @@ void cd(char *av[])
 		directory = get_env("OLDPWD");
 	}
 	if (getcwd(c_dir, sizeof(c_dir)) == NULL)
-        {
+	{
 		writes("cd: Failed to get current directory\n", 2);
 	}
 	else

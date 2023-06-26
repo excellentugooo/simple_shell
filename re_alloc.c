@@ -15,7 +15,7 @@
 
 
 
-void* re_alloc(void* ptr, size_t size) 
+void *re_alloc(void *ptr, size_t size) 
 {
 	void* new_ptr = malloc(size);
 

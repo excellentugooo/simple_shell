@@ -2,7 +2,9 @@
 
 /**
 * find_path - gets to path to an argument.
-* return: path.
+* @input: input to get path
+*
+* Return: path.
 */
 
 char *find_path(char *input)
@@ -13,7 +15,6 @@ char *find_path(char *input)
 	struct stat buff;
 	char *delim = ":";
 
-/*	rmspace(input);*/
 	path = get_env("PATH");
 	if (path)
 	{
@@ -27,7 +28,7 @@ char *find_path(char *input)
 			if (filepath == NULL)
 			{
 				free(pathcopy);
-				return(NULL);
+				return (NULL);
 			}
 			str_cpy(filepath, token);
 			str_cat(filepath, "/");

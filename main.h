@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include <stdio.h>
+#include <malloc.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -14,11 +15,12 @@ char **tokenize(char *input, char *delim);
 void writes(char *s, int stream);
 void exec_ve(char *path, char *av[], char *env[]);
 int _atoi(char *s);
-char *get_env(char *name);
+char *get_env(char *enviv);
 void set_env(char *av[]);
 void unset_env(char *av[]);
 void cd(char *av[]);
 void rmspace(char *input);
+void *re_alloc(void *ptr, size_t size);
 void rmit(char *input);
 void execute_cmd(char *av[], char *env[], char *cmd);
 char *str_str(char *haystack, char *needle);
