@@ -9,12 +9,18 @@ void int_shell(void)
 	char *input = NULL;
 	char **av;
 	int stat = -1;
+	char *cmd = NULL;
 
 	do {
 		prompt();
 		input = getint();
-		av = parse(input);
-		stat = excute_built(av);
+		cmd = strtok(input, ";");
+		while (cmd != NULL)
+		{
+			av = parse(cmd);
+			stat = excute_built(av);
+			cmd = strtok(NULL, ";");
+		}
 		free(input);
 		free(av);
 
@@ -32,11 +38,17 @@ void non_intshell(void)
 	char *input = NULL;
 	char **av;
 	int stat = -1;
+	char *cmd = NULL;
 
 	do {
 		input = get_strem();
-		av = parse(input);
-		stat = excute_built(av);
+		cmd = strtok(input, ";");
+		while (cmd != NULL)
+		{
+			av = parse(cmd);
+			stat = excute_built(av);
+			cmd = strtok(NULL, ";");
+		}
 		free(input);
 		free(av);
 

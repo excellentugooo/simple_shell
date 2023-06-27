@@ -16,7 +16,8 @@ int exec_vp(char *av[])
 	{
 		if (execvp(av[0], av) == -1)
 
-		perror("no child process");
+		perror("Error");
+		free(av);
 		exit(EXIT_FAILURE);
 	}
 	else if (value < 0)
