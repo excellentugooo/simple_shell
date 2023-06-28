@@ -2,15 +2,11 @@
 
 /**
  * main - a simple shell
- * @arc: argument count
- * @arv: argument vector
  * Return: 0 on success
  */
 
-int main(int arc, char *arv[])
+int main(void)
 {
-	char *filename = arv[1];
-	(void) arc;
 
 	if (isatty(STDIN_FILENO) == 1)
 	{
@@ -18,7 +14,7 @@ int main(int arc, char *arv[])
 	}
 	else
 	{
-		non_intshell(filename);
+		non_intshell();
 	}
 	return (0);
 }

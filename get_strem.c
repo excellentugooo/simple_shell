@@ -2,10 +2,9 @@
 
 /**
  * get_strem - reads line from stdin
- * @file: file name
  * Return: line pointer
  */
-char *get_strem(FILE *file)
+char *get_strem(void)
 {
 	int buf = 1024;
 	int k = 0;
@@ -18,8 +17,7 @@ char *get_strem(FILE *file)
 	}
 	while (1)
 	{
-		/*ch = getchar();*/
-		ch = fgetc(file);
+		ch = getchar();
 		if (ch == EOF)
 		{
 			free(input);

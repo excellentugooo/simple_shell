@@ -32,25 +32,19 @@ void int_shell(void)
 
 /**
 * non_intshell - shell for non interactive mode.
-* @filename: file name
 *
 */
-void non_intshell(char *filename)
+void non_intshell(void)
 {
 	char *input = NULL;
 	char **av;
 	int stat = -1;
 	char *cmd = NULL;
-	FILE *file;
 
-	file = fopen(filename, "r");
-	if (file == NULL)
-	{
-		exit(1);
-	}
+
 
 	do {
-		input = get_strem(file);
+		input = get_strem();
 		cmd = strtok(input, ";");
 		while (cmd != NULL)
 		{
@@ -64,5 +58,4 @@ void non_intshell(char *filename)
 		if (stat >= 0)
 			exit(stat);
 	} while (stat == -1);
-	fclose(file);
 }
